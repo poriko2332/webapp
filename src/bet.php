@@ -13,6 +13,7 @@
   $bet = 0;   //プレイヤーが選択した賭け金額
   //タイトルから遷移されたときの初期化処理
   //bet(自分の持ち金)が未定義なら勝率と一緒に初期化する
+  //もしmoneyが0以下ならゲーム終了、index.phpへの遷移を促す
   if (!isset($_POST["money"])) {
     $money = 500;   //プレイヤー持ち金
     $win = 0;
@@ -22,17 +23,23 @@
     $win = $_POST["win"];
     $lose = $_POST["lose"];
   }
+  if ($money == 0 ) {
+    echo "<h1>ゲームオーバー!!</h1>";
+    echo "<form action='../index.php' method='POST'>";
+    echo "<input type='submit' value='タイトルへ戻る'></form>";
+  } else {
+    echo "<h1>賭け金選択</h1>";
+    echo "<p>現在のあなたの持ち金 => $money<br></p>";
+    echo "<p>現在のあなたの戦績 => 勝ち: $win 負け: $lose</p>";
+    echo "<form action='player.php' method='POST'>";
+    echo "<input type='number' value='10' min='10' max='$money' step='10' name='bet'>"; 
+    echo "<input type='submit' value='賭け金決定!'>";
+    // <!-- <input type='hidden' value=$bet name='bet'> -->
+    echo "<input type='hidden' value='$money' name='money'>";
+    echo "<input type='hidden' value='$win' name='win'>";
+    echo "<input type='hidden' value='$lose' name='lose'>";
+  }
   ?>
-  <h1>賭け金選択</h1>
-  <p>現在のあなたの持ち金 => <?php echo $money ?><br></p>
-  <p>現在のあなたの戦績 => <?php echo "勝ち: ", $win, " 負け: ", $lose ?></p>
-  <form action="player.php" method="POST">
-    <input type="number" value="10" min="10" max="<?php echo $money; ?>" step="10" name="bet"> 
-    <input type="submit" value="賭け金決定!">
-    <!-- <input type="hidden" value="<?= $bet ?>" name="bet"> -->
-    <input type="hidden" value="<?= $money ?>" name="money">
-    <input type="hidden" value="<?= $win ?>" name="win">
-    <input type="hidden" value="<?= $lose ?>" name="lose">
   </form> 
 </body> 
 </html>

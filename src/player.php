@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../card_pic.css">
   <title>Player Turn</title>
 </head>
 
@@ -52,25 +53,41 @@
       $count++;
     }
   }
-
-  print_r($deck);
-
-  //ディーラーのハンド情報の表示
-  echo "ディーラーのハンドは<br>"; 
-  echo $dealer_hand[0], " <br>**<br>";
-  
-  //プレイヤーのハンド情報の表示、持ち札分繰り返す
-  echo "あなたのハンドは<br>";
-  for($i = 0; $i < count($player_hand); $i++) {
-    echo $player_hand[$i], "<br>";
-  }
-  echo "あなたの合計値";
-  $player_score = convert($player_hand);
-  print($player_score);
-
-  //echo print_r($deck->card), "<br>", print_r($dealer_hand), "<br>", print_r($player_hand);
   ?>
-  <?php
+  <!-- //ディーラーのハンド情報の表示 -->
+
+  <div class="dealer">
+    <h1>ディーラー</h1>
+    <div class="container">
+    <?php
+    $hoge = CnvToPic($dealer_hand[0]);
+    echo $hoge;
+    echo "<div class='card' style='background-position: -185px -583px;'></div>";    //裏面の表示
+    ?>
+    </div>
+    <p>ディーラーの合計値: ???</p>
+  </div>
+  
+  <!-- //プレイヤーのハンド情報の表示、持ち札分繰り返す -->
+  <div class="player">
+    <hr>
+    <h1>プレイヤー</h1>
+    <div class="container">
+    <?php
+    for($i = 0; $i < count($player_hand); $i++) {
+      $hoge = CnvToPic($player_hand[$i]);
+      echo $hoge;
+    }
+    $player_score = convert($player_hand);
+    ?>
+    </div>
+    <?php
+    echo "<p>プレイヤーの合計値: $player_score</p>";
+    ?>
+  </div>
+
+  <div class="button">
+    <?php
     //バースト処理
     //初期手札で21ならブラックジャック、bet * 1.5でプレイヤー勝利
     //21以下ならヒット、ステイボタン表示
@@ -135,7 +152,8 @@
       echo "<input type='hidden' value=". ($lose + 1). " name='lose'>";
       echo "</form>";
     }
-  ?>
+    ?>
+  </div>
   </form>
 </body>
 

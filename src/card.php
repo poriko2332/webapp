@@ -30,4 +30,33 @@
     }
     return $result;
   }
+
+  //カードの表面の画像を、カードナンバーに対応させて出力する
+  //素材画像のトランプが精密な大きさではないのでadujstで正確な位置に合わせなければ正しく表示されない
+  //divタグで出力、cssの変数を数字に合わせて変更する
+  function CnvToPic($number) {
+    $a = 0;
+    $tmp = $number % 13;    //カードナンバーを算出
+    if($tmp >=0 && $tmp <= 1){
+      $adjust = 0;
+    } else if($tmp >= 1 && $tmp <= 7){
+      $adjust = 1;
+    } else if($tmp >= 8) {
+      $adjust = 2;
+    } else {
+      $adjust = 3;
+    }
+    $a = -93 * $tmp + $adjust;
+
+    //スート事に画像変更
+    if($number < 13) {
+      return "<div class='card' style='background-position: $a". "px 0px;'></div>";
+    } else if($number < 26) {
+      return "<div class='card' style='background-position: $a" . "px -146px;'></div>";
+    } else if($number < 37) {
+      return "<div class='card' style='background-position: $a" . "px -291px;'></div>";
+    } else {
+      return "<div class='card' style='background-position: $a" . "px -437px;'></div>";
+    } 
+  }
 ?>

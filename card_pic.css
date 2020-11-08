@@ -1,0 +1,28 @@
+.card {
+  vertical-align: middle;
+  background: url("./img/cards.jpg");
+  width: 87px;
+  height: 121px;
+  float: left;
+  background-repeat: no-repeat;
+}
+
+.dealer{
+  text-align: center;
+}
+
+.player{
+  text-align: center;
+}
+
+.container{
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  
+}

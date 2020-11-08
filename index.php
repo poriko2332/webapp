@@ -14,6 +14,7 @@
     <h2>ルール説明</h2>
     <p>ごにょごにょ</p>
     <a href="./src/bet.php">ゲームスタート!</a>
+    <a href="test.php">cardtest</a>
   </div>
 </body>
 
