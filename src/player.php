@@ -79,10 +79,15 @@
       echo $hoge;
     }
     $player_score = convert($player_hand);
+    $player_score_A = convert_includeA($player_hand);
     ?>
     </div>
     <?php
-    echo "<p>プレイヤーの合計値: $player_score</p>";
+    if ($player_score_A >= 22 ) {
+      echo "<p>プレイヤーの合計値: $player_score</p>";
+    } else {
+      echo "<p>プレイヤーの合計値: $player_score / (Aを含めると: $player_score_A)</p>";
+    }
     ?>
   </div>
 
@@ -91,7 +96,7 @@
     //バースト処理
     //初期手札で21ならブラックジャック、bet * 1.5でプレイヤー勝利
     //21以下ならヒット、ステイボタン表示
-    if($player_score == 21 && $blackjack_chance == 0){
+    if($player_score_A == 21 && $blackjack_chance == 0){
       echo "!!ブラックジャック!!<br>";
       echo "WIN ". ($bet * 2.5). "<br>";
       echo "あなたの勝ちです!<br>";
@@ -101,7 +106,7 @@
       echo "<input type='hidden' value=" . ($win + 1) . " name='win'>";
       echo "<input type='hidden' value=" . $lose . " name='lose'>";
       echo "</form>";
-    } else if($player_score <= 21) {
+    } else if($player_score_A <= 21) {
       //ヒットボタン処理
       echo "<form action='player.php' method='POST'>";
       echo "<input type='submit' value='ヒット'>";
@@ -122,9 +127,9 @@
       echo "<input type='hidden' value='1' name='blackjack_chance'>";
       echo "</form>";
       
-      //ステイボタン処理
+      //スタンドボタン処理
       echo "<form action='dealer.php' method='POST'>";
-      echo "<input type='submit' value='ステイ'>";
+      echo "<input type='submit' value='スタンド'>";
       echo "<input type='hidden' name='count' value=" . $count . ">";
       for ($i = 0; $i < count($dealer_hand); $i++) {
         echo "<input type='hidden' name='dealer_hand[]' value=" . $dealer_hand[$i] . ">";
@@ -136,6 +141,7 @@
         echo "<input type='hidden' name='deck[]' value=" . $deck[$i] . ">";
       }
       echo "<input type='hidden' value=" . $player_score . " name='player_score'>";
+      echo "<input type='hidden' value=" . $player_score_A . " name='player_score_A'>"; 
       echo "<input type='hidden' value=" . $money . " name='money'>";
       echo "<input type='hidden' value=" . $bet . " name='bet'>";
       echo "<input type='hidden' value=" . $win . " name='win'>";

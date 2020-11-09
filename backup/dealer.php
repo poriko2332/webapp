@@ -76,7 +76,7 @@
     <?php
     //プレイヤーのスコアと比較
     //ディーラーのスコアが22以上でない且つプレイヤーより合計点が多い
-    if( !($dealer_score_A > 21) && ($dealer_score > $player_score) ) {
+    if( !($dealer_score > 21 || $dealer_score_A > 21) && ($dealer_score > $player_score) ) {
       echo "<p>あなたの負けです!</p>";
       echo "<form action='bet.php' method='POST'>";
       echo "<input type='submit' value='賭け金選択に戻る'>";
@@ -84,7 +84,7 @@
       echo "<input type='hidden' value=" . $win . " name='win'>";
       echo "<input type='hidden' value=" . ($lose + 1) . " name='lose'>";
       echo "</form>";
-    } else if($dealer_score_A > 21 || ($dealer_score_A > 16 && ($dealer_score_A < $player_score_A))) { 
+    } else if($dealer_score > 21 || ($dealer_score > 16 && ($dealer_score < $player_score))) { 
       echo "<p>あなたの勝ちです!</p>" ;
       echo "WIN " . ($bet * 2) . "<br>" ;
       echo "<form action='bet.php' method='POST'>" ;
@@ -93,7 +93,7 @@
       echo "<input type='hidden' value=" . ($win + 1) . " name='win'>" ; 
       echo "<input type='hidden' value=" . $lose . " name='lose'>" ;
       echo "</form>" ; 
-    } else if($dealer_score_A > 21 || ($dealer_score_A > 16 && $dealer_score_A == $player_score_A)){
+    } else if(($dealer_score > 21 || $dealer_score_A > 21) || ($dealer_score > 16 && $dealer_score == $player_score) || ($dealer_score_A > 16 && $dealer_score_A == ($player_score || $player_score_A))){
       echo "<p>引き分けです!</p>";
       echo "WIN 0<br>";
       echo "<form action='bet.php' method='POST'>";

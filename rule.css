@@ -1,0 +1,20 @@
+.rule {
+  text-align: center;
+  margin: 0px 320px 0px 320px;
+}
+
+.example{
+  display: flex;
+  justify-content: center;
+}
+
+.rule_dealer{
+  margin: 0px 10px 0px 10px;
+  background-color: aqua;
+}
+
+.rule_player{
+  margin: 0px 10px 0px 10px;
+  background-color: coral;
+}
+
