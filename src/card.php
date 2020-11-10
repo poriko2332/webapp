@@ -31,26 +31,6 @@
     return $result;
   }
 
-  /*
-  //Aを11として扱ったときの手札の合計値
-  function convert_includeA($cnv){
-    $result = 0;
-    $ACount = 0;    //Aが2回以上でたときに、2回目からは1として扱うための変数
-    for ($i = 0; $i < count($cnv); $i++) {
-      //JQKだったときの処理、全て10に変換
-      if ($cnv[$i] % 13 == 10 || $cnv[$i] % 13 == 11 || $cnv[$i] % 13 == 12) {
-        $result += 10;
-      } else if ($cnv[$i] % 13 == 0 && $ACount == 0) {
-        $ACount++;
-        $result += 11;
-      } else {
-        $result += $cnv[$i] % 13 + 1;    //本来の数字に対応させるために+1
-      }
-    }
-    return $result;
-  }
-  */
-
   //カードの表面の画像を、カードナンバーに対応させて出力する
   //素材画像のトランプが精密な大きさではないのでadujstで正確な位置に合わせなければ正しく表示されない
   //divタグで出力、cssの変数を数字に合わせて変更する
@@ -81,6 +61,7 @@
   }
 
   //Aと数字部分の処理
+  //Aは最後に加算する
   function convert_includeA($hand) {
     rsort($hand);
     $tmp = 0;

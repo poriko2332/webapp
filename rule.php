@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="rule.css">
-  <link rel="stylesheet" href="card_pic.css">
+  <link rel="stylesheet" href="./css/rule.css">
+  <link rel="stylesheet" href="./css/card_pic.css">
   <title>ルール説明</title>
 </head>
 

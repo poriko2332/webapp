@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../card_pic.css">
+  <link rel="stylesheet" href="../css/card_pic.css">
   <title>Dealer Turn</title>
 </head>
 
@@ -53,7 +53,7 @@
     }
     ?>
   </div>
-    <!-- //プレイヤーの手の表示 -->
+  <!-- //プレイヤーの手の表示 -->
   <div class="player">
     <hr>
     <h1>プレイヤー</h1>
@@ -76,7 +76,7 @@
     <?php
     //プレイヤーのスコアと比較
     //ディーラーのスコアが22以上でない且つプレイヤーより合計点が多い
-    if( !($dealer_score_A > 21) && ($dealer_score > $player_score) ) {
+    if (!($dealer_score_A > 21) && ($dealer_score_A > $player_score_A)) {
       echo "<p>あなたの負けです!</p>";
       echo "<form action='bet.php' method='POST'>";
       echo "<input type='submit' value='賭け金選択に戻る'>";
@@ -84,16 +84,16 @@
       echo "<input type='hidden' value=" . $win . " name='win'>";
       echo "<input type='hidden' value=" . ($lose + 1) . " name='lose'>";
       echo "</form>";
-    } else if($dealer_score_A > 21 || ($dealer_score_A > 16 && ($dealer_score_A < $player_score_A))) { 
-      echo "<p>あなたの勝ちです!</p>" ;
-      echo "WIN " . ($bet * 2) . "<br>" ;
-      echo "<form action='bet.php' method='POST'>" ;
-      echo "<input type='submit' value='賭け金選択に戻る'>" ; 
-      echo "<input type='hidden' value=" . ($money + $bet * 2) . " name='money'>" ; 
-      echo "<input type='hidden' value=" . ($win + 1) . " name='win'>" ; 
-      echo "<input type='hidden' value=" . $lose . " name='lose'>" ;
-      echo "</form>" ; 
-    } else if($dealer_score_A > 21 || ($dealer_score_A > 16 && $dealer_score_A == $player_score_A)){
+    } else if ($dealer_score_A > 21 || ($dealer_score_A > 16 && ($dealer_score_A < $player_score_A))) {
+      echo "<p>あなたの勝ちです!</p>";
+      echo "WIN " . ($bet * 2) . "<br>";
+      echo "<form action='bet.php' method='POST'>";
+      echo "<input type='submit' value='賭け金選択に戻る'>";
+      echo "<input type='hidden' value=" . ($money + $bet * 2) . " name='money'>";
+      echo "<input type='hidden' value=" . ($win + 1) . " name='win'>";
+      echo "<input type='hidden' value=" . $lose . " name='lose'>";
+      echo "</form>";
+    } else if ($dealer_score_A > 21 || ($dealer_score_A > 16 && $dealer_score_A == $player_score_A)) {
       echo "<p>引き分けです!</p>";
       echo "WIN 0<br>";
       echo "<form action='bet.php' method='POST'>";
@@ -107,22 +107,24 @@
       echo "<form action='dealer.php' method='POST'>";
       echo "<input type='submit' value='ディーラーのヒット'>";
       echo "<input type='hidden' name='count' value=" . $count . ">";
-      for ($i = 0; $i < count($dealer_hand); $i++) { 
-        echo "<input type='hidden' name='dealer_hand[]' value=" . $dealer_hand[$i] . ">" ; }
-      for ($i=0; $i < count($player_hand); $i++) { 
-        echo "<input type='hidden' name='player_hand[]' value=" . $player_hand[$i] . ">" ; } 
-      for ($i=0; $i < count($deck); $i++) { 
-        echo "<input type='hidden' name='deck[]' value=" . $deck[$i] . ">" ; 
+      for ($i = 0; $i < count($dealer_hand); $i++) {
+        echo "<input type='hidden' name='dealer_hand[]' value=" . $dealer_hand[$i] . ">";
       }
-      echo "<input type='hidden' value=" . $player_score . " name='player_score'>" ;
+      for ($i = 0; $i < count($player_hand); $i++) {
+        echo "<input type='hidden' name='player_hand[]' value=" . $player_hand[$i] . ">";
+      }
+      for ($i = 0; $i < count($deck); $i++) {
+        echo "<input type='hidden' name='deck[]' value=" . $deck[$i] . ">";
+      }
+      echo "<input type='hidden' value=" . $player_score . " name='player_score'>";
       echo "<input type='hidden' value=" . $player_score_A . " name='player_score_A'>";
-      echo "<input type='hidden' value=" . $money . " name='money'>" ;
-      echo "<input type='hidden' value=" . $bet . " name='bet'>" ;
-      echo "<input type='hidden' value=" . $win . " name='win'>" ;
-      echo "<input type='hidden' value=" . $lose . " name='lose'>" ;
-      echo "<input type='hidden' value='1' name='hit_flag'>" ;
-      echo "</form>" ; 
-      } 
+      echo "<input type='hidden' value=" . $money . " name='money'>";
+      echo "<input type='hidden' value=" . $bet . " name='bet'>";
+      echo "<input type='hidden' value=" . $win . " name='win'>";
+      echo "<input type='hidden' value=" . $lose . " name='lose'>";
+      echo "<input type='hidden' value='1' name='hit_flag'>";
+      echo "</form>";
+    }
     ?>
 </body>
 

@@ -3,8 +3,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link href="index.css" rel="stylesheet">
-  <link href="card_pic.css" rel="stylesheet">
+  <link href="./css/index.css" rel="stylesheet">
+  <link href="./css/card_pic.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BlackJack</title>
 </head>
